@@ -105,7 +105,7 @@
                         <span class="ml-2 text-xs text-slate-400 code-font">main.pseudo</span>
                     </div>
                     <div class="p-4 overflow-x-auto">
-                        <pre id="code-block" class="code-font text-sm leading-relaxed text-slate-300"></pre>
+                        <pre id="code-block" class="block whitespace-pre-wrap"></pre>
                     </div>
                 </div>
 
@@ -378,10 +378,20 @@
             if (difficulty === 'sulit') difficultyDesc = "Perulangan bersarang, logika deret angka, atau manipulasi kondisi if yang sedikit menipu.";
             if (difficulty === 'sangat-sulit') difficultyDesc = "Algoritma khusus, simulasi modulo manual, rekursif fiktif, atau nested loop kompleks.";
 
-            const prompt = `Buatkan 1 soal pseudocode tingkat ${difficulty} (${difficultyDesc}).
-Format pseudocode WAJIB menggunakan keyword bahasa Indonesia (JIKA, MAKA, SEBALIKNYA, UNTUK, SELAMA, CETAK, <-).
-Jawaban dari output pseudocode harus berupa 1 angka (integer).
-Berikan penjelasan yang runut langkah demi langkah tentang mengapa jawabannya demikian.`;
+            const prompt = `Buatkan 1 soal pilihan ganda tentang pseudocode tingkat ${difficulty}. 
+
+PENTING UNTUK KODE PSEUDOCODE:
+1. Kode HARUS terdiri dari beberapa baris (multiline) menggunakan \\n sebagai pemisah baris.
+2. Jangan gabungkan kode menjadi 1 baris.
+
+Format output WAJIB JSON murni tanpa markdown:
+{
+  "code": "PROGRAM HitungData\\nVAR a, b, c : INTEGER\\nFOR i = 1 TO 5 DO\\n  a = a + i\\nEND",
+  "question": "Berapakah nilai akhir variabel a?",
+  "options": ["10", "15", "20", "25"],
+  "answer": 1,
+  "explanation": "Penjelasan singkat"
+}`;
 
             const payload = {
                 contents: [{ parts: [{ text: prompt }] }],
